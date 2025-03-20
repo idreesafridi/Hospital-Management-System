@@ -1,0 +1,663 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 11, 2024 at 09:52 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `hospital_management_system`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `disease` varchar(255) DEFAULT NULL,
+  `appointment_time` varchar(111) DEFAULT NULL,
+  `appointment_date` date DEFAULT NULL,
+  `status` varchar(111) DEFAULT 'pending' COMMENT 'pending,accepted,rejected,paid',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `patient_id`, `doctor_id`, `disease`, `appointment_time`, `appointment_date`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 27, 26, NULL, '9:00', '2024-12-09', 'Accept', '2024-12-11 14:55:56', '2024-12-11 14:59:24', NULL),
+(2, 27, 26, NULL, '10:00', '2024-12-10', 'pending', '2024-12-11 15:00:28', '2024-12-11 15:00:28', NULL),
+(5, 27, 26, NULL, '11:00', '2024-12-11', 'pending', '2024-12-11 15:02:54', '2024-12-11 15:02:54', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_attachments`
+--
+
+CREATE TABLE `blog_attachments` (
+  `id` int(11) NOT NULL,
+  `blog_id` int(11) NOT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `file`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Science', 'category_images/1Sy9VTNJyqaMM9tQMBxpuCQgFH7EZvyMRnkaCM6c.png', 1, '2024-12-04 12:51:19', '2024-12-05 15:13:48', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `subject` longtext DEFAULT NULL,
+  `message` longtext DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `email`, `subject`, `message`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, NULL, NULL, NULL, NULL, '2024-12-06 13:50:53', '2024-12-06 13:50:53', NULL),
+(2, NULL, NULL, NULL, NULL, '2024-12-06 13:51:10', '2024-12-06 13:51:10', NULL),
+(3, 'Walker Graham', 'wipuqyri@mailinator.com', 'Nulla et quae quo om', 'Voluptatem rem aut u', '2024-12-06 13:55:19', '2024-12-06 13:55:19', NULL),
+(4, 'Bernard Harrison', 'liqevig@mailinator.com', 'Ut et neque perferen', 'Vitae enim necessita', '2024-12-06 13:56:32', '2024-12-06 13:56:32', NULL),
+(5, NULL, NULL, NULL, NULL, '2024-12-06 13:59:42', '2024-12-06 13:59:42', NULL),
+(6, NULL, NULL, NULL, NULL, '2024-12-06 14:00:22', '2024-12-06 14:00:22', NULL),
+(7, NULL, NULL, NULL, NULL, '2024-12-06 14:01:21', '2024-12-06 14:01:21', NULL),
+(8, NULL, NULL, NULL, NULL, '2024-12-06 14:25:49', '2024-12-06 14:25:49', NULL),
+(9, NULL, NULL, NULL, NULL, '2024-12-06 14:27:47', '2024-12-06 14:27:47', NULL),
+(10, NULL, NULL, NULL, NULL, '2024-12-06 14:28:29', '2024-12-06 14:28:29', NULL),
+(11, NULL, NULL, NULL, NULL, '2024-12-06 14:28:55', '2024-12-06 14:28:55', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor_attachments`
+--
+
+CREATE TABLE `doctor_attachments` (
+  `id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `file` varchar(250) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `doctor_attachments`
+--
+
+INSERT INTO `doctor_attachments` (`id`, `doctor_id`, `file`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(7, 26, 'doctor_attachments/9xbfLLCScoBejLFMOwCu6ooQ4upc1KmnehJxGsrd.png', '2024-12-05 13:14:49', '2024-12-05 13:14:49', NULL),
+(8, 26, 'doctor_attachments/hItKJPGMohFOPe13CHYmaIB3jHFqPsnKjgPnF00i.png', '2024-12-05 13:14:49', '2024-12-05 13:14:49', NULL),
+(9, 35, NULL, '2024-12-05 20:19:50', '2024-12-05 20:19:50', NULL),
+(10, 36, NULL, '2024-12-06 15:02:10', '2024-12-06 15:02:10', NULL),
+(11, 38, NULL, '2024-12-06 15:05:58', '2024-12-06 15:05:58', NULL),
+(12, 39, NULL, '2024-12-06 17:03:22', '2024-12-06 17:03:22', NULL),
+(13, 29, 'doctor_attachments/aSMAz8JBGp1LfzxpkEirXTVByQl4jPloiJ7r8riU.jpg', '2024-12-09 12:08:01', '2024-12-09 12:08:01', NULL),
+(14, 29, 'doctor_attachments/drDp9Ocsk3YNR0ZpTflfJPyG9r1tPZPlUmibggtF.jpg', '2024-12-09 12:08:01', '2024-12-09 12:08:01', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `educations`
+--
+
+CREATE TABLE `educations` (
+  `id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `university` varchar(255) DEFAULT NULL,
+  `degree` varchar(255) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `educations`
+--
+
+INSERT INTO `educations` (`id`, `doctor_id`, `university`, `degree`, `start_date`, `end_date`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 26, 'Ut at dolor et tenet', 'Incidunt quasi corr', '1974-12-16', '1996-09-26', '2024-12-04 17:22:55', '2024-12-05 13:14:49', NULL),
+(3, 26, 'karachi university', 'bs urdu', '1978-12-08', '1976-12-09', '2024-12-05 17:41:12', '2024-12-05 17:41:12', NULL),
+(4, 29, '12355', 'dfg', '2024-12-05', '2024-12-02', '2024-12-05 20:19:50', '2024-12-09 13:44:04', NULL),
+(5, 29, '12355', 'dfg', '2024-12-05', '2024-12-02', '2024-12-06 15:02:10', '2024-12-09 13:44:04', NULL),
+(6, 38, NULL, NULL, NULL, NULL, '2024-12-06 15:05:58', '2024-12-06 15:05:58', NULL),
+(7, 39, NULL, NULL, NULL, NULL, '2024-12-06 17:03:22', '2024-12-06 17:03:22', NULL),
+(8, 29, 'qee', 'qeqw', '2024-12-27', '2024-12-18', '2024-12-09 13:44:04', '2024-12-09 13:44:04', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2024_12_09_203912_create_notifications_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` char(36) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `notifiable_type` varchar(255) NOT NULL,
+  `notifiable_id` bigint(20) UNSIGNED NOT NULL,
+  `data` text NOT NULL,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
+('64f77235-a5be-4fe4-b151-ba606ae8f2fe', 'App\\Notifications\\AppointmentCreated', 'App\\Models\\User', 26, '{\"patient_name\":\"Gloria Gray\",\"doctor_name\":\"Griffith Ross\",\"appointment_time\":\"13:40\",\"appointment_date\":\"2024-12-17\"}', NULL, '2024-12-09 15:46:56', '2024-12-09 15:46:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profiles`
+--
+
+CREATE TABLE `profiles` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `speciality_id` int(11) DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL,
+  `fee` varchar(250) DEFAULT NULL,
+  `date_of_birth` varchar(250) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `about` longtext DEFAULT NULL,
+  `address` varchar(250) DEFAULT NULL,
+  `start_time` varchar(111) DEFAULT NULL,
+  `end_time` varchar(111) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `profiles`
+--
+
+INSERT INTO `profiles` (`id`, `user_id`, `speciality_id`, `profile_image`, `fee`, `date_of_birth`, `phone_number`, `about`, `address`, `start_time`, `end_time`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 0, 'profile_images/NdVn4JoKqQJDT9kMQEU1ncW0jTd9sLGmIfYjUFCH.jpg', NULL, '1993-06-30', '030035776570', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit varius fusce, et primis lacus.ssssssssssssssssssssssssssssssssssssdddddddddddddddddddsdddddddddd', 'Block 8, Tafsol, Gulshan-e-Iqbal, Karachi, 75300s', NULL, NULL, 1, '2024-12-02 17:05:07', '2024-12-06 11:51:25', NULL),
+(12, 26, 3, 'profile_images/bZrIBsLFfrJB84aHwxvQW1ZrmPQ0bQgXQNAPwENK.webp', '7000', '2021-09-23', '+1 (897) 249-4874', 'Iusto mollit molesti', 'Odit est voluptas la', '01:32', '17:22', 1, '2024-12-04 17:22:55', '2024-12-05 13:14:48', NULL),
+(13, 27, NULL, 'profile_images/rsv0kB4wmHle4fYvZ8iIXzt1v0eYGCqvwPVVmORN.jpg', NULL, '1984-01-11', '78787876547', 'Et quae in nostrud r', 'Velit debitis praese', NULL, NULL, 1, '2024-12-05 00:15:14', '2024-12-05 14:18:41', NULL),
+(14, 29, 4, 'doctor_images/cRO38QDCTu9GTggekGMDfpA1JTzJWHLKSD1ud81c.jpg', '19', '2008-12-13', '+1 (962) 615-7781', 'Nisi minus voluptas', 'Quis ea minus dignis', '10:46', '10:46', 1, '2024-12-05 17:41:12', '2024-12-09 13:44:04', NULL),
+(15, 33, NULL, 'patient_images/w6TTolgfD2DpS301YCUTZNuDrHbbeZtZQ3Shn4vf.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-12-05 17:45:36', '2024-12-05 17:45:36', NULL),
+(16, 34, NULL, 'patient_images/jFOtLbMU7IjxRGW3Y8PZo6asgv2BKDRPVnvZr954.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-12-05 19:57:28', '2024-12-05 19:57:28', NULL),
+(17, 35, 4, 'doctor_images/eN3lVc3rJIPaFkpCJ4y1OmhfrkWdqCIbOgPbMyc7.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-12-05 20:19:50', '2024-12-05 20:19:50', NULL),
+(18, 36, 4, 'doctor_images/VvUv8xkc4uoIYkQzziJJxGEAaXIjDEWcWNZ3gPlS.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-12-06 15:02:10', '2024-12-06 15:02:10', NULL),
+(19, 38, 4, 'doctor_images/kAQMmbI0lXeZKfs7WR7bvCIm7MChDtOpfpqfBgAp.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-12-06 15:05:58', '2024-12-06 15:05:58', NULL),
+(20, 39, 8, 'doctor_images/BlXx2nSgbkYbIIEyTTOnYnIx4HU1iICSdsWDks89.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-12-06 17:03:22', '2024-12-06 17:03:22', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `review` varchar(255) DEFAULT NULL,
+  `rating` varchar(255) DEFAULT NULL,
+  `term` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `user_id`, `doctor_id`, `title`, `review`, `rating`, `term`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 33, 29, 'ss', 'ss', NULL, NULL, 0, '2024-12-06 18:50:20', '2024-12-09 15:20:34', NULL),
+(2, 27, 29, 'hey', 'guys', NULL, NULL, 0, '2024-12-06 18:55:29', '2024-12-09 16:46:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `specialities`
+--
+
+CREATE TABLE `specialities` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  `status` varchar(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `specialities`
+--
+
+INSERT INTO `specialities` (`id`, `name`, `file`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 'Science', 'Speciality_images/gtHp3tkVKV6SlpFzz7IShvzBVCGeU93Wqb7WDYk1.png', '0', '2024-12-02 17:12:43', '2024-12-02 17:12:56', '2024-12-02 17:12:56'),
+(3, 'Cardiology', 'Speciality_images/SMsdlxalax99sP5iWiehW5tDrfIpjdOpHWvUWLVc.png', '1', '2024-12-02 17:13:20', '2024-12-06 17:05:58', NULL),
+(4, 'neurology', 'Speciality_images/ZlY47sAnxqAylE0qH7q3ks3Lhyx6pyeJBTrKzPe1.jpg', '1', '2024-12-02 19:59:42', '2024-12-05 13:41:50', NULL),
+(5, 'neuro', 'Speciality_images/DAkK9jZKLReknyWDzGya6dPfznwT2W5zulZ7Fuj5.png', '0', '2024-12-04 13:17:03', '2024-12-04 14:37:45', '2024-12-04 14:37:45'),
+(6, 'sds', 'Speciality_images/TigTYiKhcnLYRuOHDAHhcp1qg83ZxZWIFoQlnp5D.txt', '1', '2024-12-05 13:53:58', '2024-12-05 13:57:37', '2024-12-05 13:57:37'),
+(7, 'ALI', 'Speciality_images/q3sAaxlQxxdV734QkXgY1PQfuqEit1842zdK3fZ0.txt', '1', '2024-12-05 13:54:33', '2024-12-05 13:57:43', '2024-12-05 13:57:43'),
+(8, 'MBBS', 'Speciality_images/sBrGaweAhg5GAkiUQLZw3LVIerTq4P6m8MbptlmM.jpg', '1', '2024-12-05 20:17:27', '2024-12-06 16:55:54', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `first_name` varchar(250) DEFAULT NULL,
+  `last_name` varchar(250) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Supers Admins', 'Supers', 'Admins', 'admin@mailinator.com', NULL, '$2y$12$qpaCuUD66p2mgJ846nVPKeIPU4zHzoYaUhL5B/zaMtyypBpq5E/Ce', 'Admin', 1, NULL, '2024-12-02 17:05:07', '2024-12-06 11:51:25'),
+(26, 'Griffith Ross', 'Griffith', 'Ross', 'Doctor@mailinator.com', NULL, '$2y$12$2UcmwMuQ0C9mgCtBwrwVqOt5S7fKB7Sk30CMBHotA9tkc2ln3jISO', 'Doctor', 1, NULL, '2024-12-04 17:22:55', '2024-12-06 16:32:55'),
+(27, 'Gloria Gray', 'Gloria', 'Gray', 'Patient@mailinator.com', NULL, '$2y$12$mzGfC9v85MkpYC6hlaIFLOn/gQRded/BqVJEnehl6WFB2tbTYSE52', 'Patient', 1, NULL, '2024-12-04 19:13:25', '2024-12-05 14:18:41'),
+(29, 'Bradley Le', 'Bradley', 'Le', 'doctor1@mailinator.com', NULL, '$2y$12$rCFTKbSlRjegY.pFNlGjAeRoKul93TWd.oNEJvx6Bezcx.Of8FFhq', 'Doctor', 1, NULL, '2024-12-05 17:41:12', '2024-12-09 13:44:04'),
+(33, 'Cecilia Cantu', 'Cecilia', 'Cantu', 'patient1@mailinator.com', NULL, '$2y$12$aL1WxqnI6f0H8lv7dcjT..ub0YrLYAz6tdc2os357A7qGOyrpICrO', 'Patient', 1, NULL, '2024-12-05 17:45:36', '2024-12-05 17:45:36'),
+(34, 'Amy Walsh', 'Amy', 'Walsh', 'zykitasod@mailinator.com', NULL, '$2y$12$msd9cSS2WecFgr0NBLfdJuKLvb0mbZ1Ar4oALrPk4WPcSxHlr/Vcq', 'Patient', 1, NULL, '2024-12-05 19:57:27', '2024-12-05 19:57:27'),
+(35, 'James lee', 'James', 'lee', 'james@yopmail.com', NULL, '$2y$12$Ffkx9gJF8clOxbLr4HxCR.BzdUYn41hGj7XvEU3BL2bg0ItGI9dSO', 'Doctor', 1, NULL, '2024-12-05 20:19:50', '2024-12-06 17:18:46'),
+(36, 'Plato Lara', 'Plato', 'Lara', 'idrees32@gmail.com', NULL, '$2y$12$GQDZRvwQmRROzfOgQUsCnOeuczDro7975FXqIWg/NqpYh27/iW6s.', 'Doctor', 0, NULL, '2024-12-06 15:02:08', '2024-12-06 17:00:41'),
+(37, 'Tiger Bush', 'Tiger', 'Bush', 'idreesafridi32@gmail.com', NULL, '$2y$12$60MxPqUR8GGtMQjMhS/dD.DfHG5k.RZU3cbBnK2LJFSoGQopw0FGm', 'Doctor', 1, NULL, '2024-12-06 15:03:56', '2024-12-06 15:03:56'),
+(38, 'Kadeem Vazquez', 'Kadeem', 'Vazquez', 'faqi@mailinator.com', NULL, '$2y$12$iUAr89C5eyRH4SHgYSj/f.m/QLUgFvfiAg9.RfZQRn63//X4AV3e2', 'Doctor', 1, NULL, '2024-12-06 15:05:58', '2024-12-06 15:05:58'),
+(39, 'Valentine Garrison', 'Valentine', 'Garrison', 'giwavynu@mailinator.com', NULL, '$2y$12$cW/KpP89c2pj.RV4QqfoieKTvgIjbSOXmxK4sgVV4Sm.ZPhXECSVe', 'Doctor', 0, NULL, '2024-12-06 17:03:22', '2024-12-06 17:03:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `work_experiences`
+--
+
+CREATE TABLE `work_experiences` (
+  `id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `hospital` varchar(255) DEFAULT NULL,
+  `start_date` varchar(111) DEFAULT NULL,
+  `end_date` varchar(111) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `work_experiences`
+--
+
+INSERT INTO `work_experiences` (`id`, `doctor_id`, `hospital`, `start_date`, `end_date`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 29, 'ali hospitals', '2024-12-05', '2024-12-02', '2024-12-09 12:50:47', '2024-12-09 13:44:04', NULL),
+(2, 29, 'sdsdssds', '2024-12-05', '2024-12-02', '2024-12-09 12:51:10', '2024-12-09 13:44:04', NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blog_attachments`
+--
+ALTER TABLE `blog_attachments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `doctor_attachments`
+--
+ALTER TABLE `doctor_attachments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `educations`
+--
+ALTER TABLE `educations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`);
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `profiles`
+--
+ALTER TABLE `profiles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `specialities`
+--
+ALTER TABLE `specialities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `work_experiences`
+--
+ALTER TABLE `work_experiences`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blog_attachments`
+--
+ALTER TABLE `blog_attachments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `doctor_attachments`
+--
+ALTER TABLE `doctor_attachments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `educations`
+--
+ALTER TABLE `educations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `profiles`
+--
+ALTER TABLE `profiles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `specialities`
+--
+ALTER TABLE `specialities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `work_experiences`
+--
+ALTER TABLE `work_experiences`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
